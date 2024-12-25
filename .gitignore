@@ -1,0 +1,45 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+*.env
+
+# Flask cache and session files
+instance/
+*.log
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python egg files
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Environment variables
+.env
+*.env.*
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+*.lock
+pip-log.txt
+
+# Model files (optional, if not pushing them to Git)
+*.pkl
+*.joblib
+
+# HTML coverage reports (from 
