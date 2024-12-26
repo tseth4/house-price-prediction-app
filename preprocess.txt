@@ -23,7 +23,6 @@ scalar: bed, bath, acre_lot, house_Size, zip_code_encoded
 label encoder for state? how do we handle this?
 
 
-price                 0
 bed                   0
 bath                  0
 acre_lot              0
