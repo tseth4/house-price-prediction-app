@@ -28,10 +28,11 @@ def predict():
         data = request.form
         
         
-                # Encode state
+        # Encode state
         state = data['state']
         try:
-            encoded_state = le.transform([state])[0]  # Encode the state using LabelEncoder
+            # Encode the state using LabelEncoder
+            encoded_state = le.transform([state])[0]  
         except ValueError:
             return jsonify({'error': f"State '{state}' is not recognized. Please enter a valid state."})
 

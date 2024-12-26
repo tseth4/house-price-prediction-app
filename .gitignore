@@ -39,7 +39,7 @@ Thumbs.db
 pip-log.txt
 
 # Model files (optional, if not pushing them to Git)
-*.pkl
+# *.pkl
 *.joblib
 
 # HTML coverage reports (from 
