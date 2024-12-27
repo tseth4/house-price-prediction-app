@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Input from "@/components/InputField/InputField";
-
+import StateDropdown from "../StateDropdown/StateDropdown";
+import Button from "@/components/Button/Button";
 import "./HomePrice.scss"
 const HomePricePredictionForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -14,10 +15,21 @@ const HomePricePredictionForm: React.FC = () => {
   const [prediction, setPrediction] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  const areAllFieldsFilled = Object.values(formData).every((value) => value.trim() !== "");
+
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
+
+  const handleStateChange = (selectedState: string) => {
+    setFormData((prevData) => ({ ...prevData, state: selectedState }));
+  };
+
+  useEffect(() => {
+    console.log("formData: ",formData)
+  },[formData])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,79 +61,16 @@ const HomePricePredictionForm: React.FC = () => {
     <div className="home-price-container">
       <h1>Home Price Prediction</h1>
       <form className="home-price-container__form" onSubmit={handleSubmit}>
-        <Input inputType="number" name="bed" label="Bedrooms" value={formData.bed} onChange={handleChange}/>
-        <Input inputType="number" name="bath" label="Bath" value={formData.bath} onChange={handleChange}/>
-        <Input inputType="number" name="acre_lot" label="Acre lot (eg.0.15)" value={formData.acre_lot} onChange={handleChange}/>
-        <Input inputType="number" name="house_size" label="House size (eg. 1500)" value={formData.house_size} onChange={handleChange}/>
-        <Input inputType="text" name="state" label="State (eg. Washington)" value={formData.state} onChange={handleChange}/>
-        <Input inputType="number" name="zip_code" label="Zipcode" value={formData.zip_code} onChange={handleChange}/>
-        {/* <label htmlFor="bed">Number of Bedrooms:</label>
-        <input
-          type="number"
-          id="bed"
-          name="bed"
-          value={formData.bed}
-          onChange={handleChange}
-          required
-          placeholder="e.g., 3"
+        <Input inputType="number" name="bed" label="Bedrooms" value={formData.bed} onChange={handleChange} />
+        <Input inputType="number" name="bath" label="Bath" value={formData.bath} onChange={handleChange} />
+        <Input inputType="number" name="acre_lot" label="Acre lot (eg.0.15)" value={formData.acre_lot} onChange={handleChange} />
+        <Input inputType="number" name="house_size" label="House size (eg. 1500)" value={formData.house_size} onChange={handleChange} />
+        <StateDropdown
+          onStateChange={handleStateChange}
         />
+        <Input inputType="number" name="zip_code" label="Zipcode" value={formData.zip_code} onChange={handleChange} />
+        <Button label="Predict Price" onClick={() => {}} disabled={!areAllFieldsFilled} />
 
-        <label htmlFor="bath">Number of Bathrooms:</label>
-        <input
-          type="number"
-          id="bath"
-          name="bath"
-          value={formData.bath}
-          onChange={handleChange}
-          required
-          placeholder="e.g., 2.5"
-        />
-
-        <label htmlFor="acre_lot">Lot Size (in acres):</label>
-        <input
-          type="number"
-          id="acre_lot"
-          name="acre_lot"
-          value={formData.acre_lot}
-          onChange={handleChange}
-          required
-          placeholder="e.g., 0.15"
-        />
-
-        <label htmlFor="house_size">House Size (in square feet):</label>
-        <input
-          type="number"
-          id="house_size"
-          name="house_size"
-          value={formData.house_size}
-          onChange={handleChange}
-          required
-          placeholder="e.g., 1500"
-        />
-
-        <label htmlFor="state">State:</label>
-        <input
-          type="text"
-          id="state"
-          name="state"
-          value={formData.state}
-          onChange={handleChange}
-          required
-          placeholder="e.g., California"
-        />
-
-        <label htmlFor="zip_code">Zip Code:</label>
-        <input
-          type="number"
-          id="zip_code"
-          name="zip_code"
-          value={formData.zip_code}
-          onChange={handleChange}
-          required
-          placeholder="e.g., 90210"
-        /> */}
-
-        <button type="submit">Predict Price</button>
       </form>
       {prediction && <p>{prediction}</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
