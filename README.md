@@ -6,3 +6,6 @@ docker build -t backend-flask .
 docker run -d -p 5000:5000 backend-flask
 
 ```
+```
+docker-compose up
+```
