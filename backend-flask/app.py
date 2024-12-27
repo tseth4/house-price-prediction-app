@@ -2,73 +2,69 @@ from flask import Flask, request, jsonify, render_template
 import joblib
 import numpy as np
 import pandas as pd
+from flask_cors import CORS
 
 # Initialize Flask app
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
 
-# Load the compressed model
+# Load the compressed model and supporting files
 model = joblib.load("model/house_price_model_v2_compressed.pkl")
 scaler = joblib.load("model/scaler.pkl")  # Scaler used during training
-zip_code_avg_price = pd.read_csv("model/zip_code_avg_price.csv", index_col=0) 
-zip_code_avg_price = zip_code_avg_price.squeeze("columns")  # Explicitly squeeze columns
-
+zip_code_avg_price = pd.read_csv("model/zip_code_avg_price.csv", index_col=0).squeeze("columns")  # Load as Series
 le = joblib.load("model/label_encoder.pkl")
 
-
-# Home route
 @app.route('/')
 def home():
-    return render_template('index.html')  # Serve the HTML file for user input
+    return render_template('index.html')
 
-# Predict route
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
-        # Extract data from the form
-        data = request.form
-        
-        
-        # Encode state
-        state = data['state']
-        try:
-            # Encode the state using LabelEncoder
-            encoded_state = le.transform([state])[0]  
-        except ValueError:
-            return jsonify({'error': f"State '{state}' is not recognized. Please enter a valid state."})
+        # Parse incoming JSON data
+        data = request.get_json()
+        if not data:
+            return jsonify({'error': 'No data provided. Ensure the request is JSON.'}), 400
 
-        
-        # Encode the zip code
-        zip_code = float(data['zip_code'])  # Get the zip code input
-        if zip_code in zip_code_avg_price.index:
-            zip_code_encoded = zip_code_avg_price[zip_code]
-        else:
-            zip_code_encoded = zip_code_avg_price.mea
-            
-        # Prepare features
+        # Log received data
+        print(f"Received data: {data}")
+
+        # Encode state
+        state = data.get('state', '')
+        try:
+            encoded_state = le.transform([state])[0]
+        except ValueError:
+            return jsonify({'error': f"State '{state}' not recognized. Available states: {list(le.classes_)}"}), 400
+
+        # Encode zip code
+        zip_code = float(data.get('zip_code', 0))
+        zip_code_encoded = zip_code_avg_price.get(zip_code, zip_code_avg_price.mean())
+
+        # Prepare numerical features
         numerical_features = np.array([
-            float(data['bed']),
-            float(data['bath']),
-            float(data['acre_lot']),
-            float(data['house_size']),
+            float(data.get('bed', 0)),
+            float(data.get('bath', 0)),
+            float(data.get('acre_lot', 0)),
+            float(data.get('house_size', 0)),
             zip_code_encoded
-        ]).reshape(1, -1)  # Reshape to a single sample
-        
+        ]).reshape(1, -1)
+
         # Scale numerical features
         numerical_features_scaled = scaler.transform(numerical_features)
+        print(f"Scaled features: {numerical_features_scaled}")
 
-        # Combine scaled numerical features with encoded state
+        # Combine scaled features with encoded state
         features = np.hstack([numerical_features_scaled, [[encoded_state]]])
 
         # Make prediction
         prediction = model.predict(features)[0]
 
-        # Return prediction as JSON
-        return jsonify({
-            'prediction': round(prediction, 2)  # Format the prediction nicely
-        })
-    except Exception as e:
-        return jsonify({'error': str(e)})
+        # Return formatted prediction
+        return jsonify({'prediction': round(prediction, 2)})
 
-# Run the app
+    except Exception as e:
+        print(f"Error during prediction: {e}")
+        return jsonify({'error': str(e)}), 500
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

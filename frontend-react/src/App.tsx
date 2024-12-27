@@ -1,11 +1,12 @@
 
 import './App.css'
+import HomePricePredictionForm from './components/HandlePricePredictionForm'
 
 function App() {
 
   return (
     <>
-      Hello World!
+      <HomePricePredictionForm/>
     </>
   )
 }
