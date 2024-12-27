@@ -9,7 +9,7 @@ docker run -d -p 5000:5000 backend-flask
 ```
 docker-compose up
 ```
-#### If cloning ensure 
+#### If cloning: 
 Ensure you have Git LFS installed.
 Then run:
 ```
