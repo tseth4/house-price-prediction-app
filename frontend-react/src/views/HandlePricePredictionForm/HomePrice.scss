@@ -13,6 +13,12 @@
     font-weight: 500;
   }
 
+  &-results {
+    display: flex;
+    align-items: center;
+    padding: 1em;
+  }
+
 
   @include bp.respond-to(tablet) {
     width: 50%;
@@ -37,4 +43,9 @@
       font-size: 0.75em;
     }
   }
+}
+
+.prediction-value {
+  color: var(--accent-text-color);
+  font-size: 2em;
 }

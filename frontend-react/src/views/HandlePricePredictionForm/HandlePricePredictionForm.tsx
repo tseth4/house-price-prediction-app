@@ -28,8 +28,8 @@ const HomePricePredictionForm: React.FC = () => {
   };
 
   useEffect(() => {
-    console.log("formData: ",formData)
-  },[formData])
+    console.log("formData: ", formData)
+  }, [formData])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,7 +51,7 @@ const HomePricePredictionForm: React.FC = () => {
 
       const data = await response.json();
       console.log("data.prediction: ", data)
-      setPrediction(`Predicted Price: ${data.prediction}`);
+      setPrediction(`${data.prediction}`);
     } catch (err: any) {
       setError(`Failed to fetch prediction: ${err.message}`);
     }
@@ -69,11 +69,19 @@ const HomePricePredictionForm: React.FC = () => {
           onStateChange={handleStateChange}
         />
         <Input inputType="number" name="zip_code" label="Zipcode" value={formData.zip_code} onChange={handleChange} />
-        <Button label="Predict Price" onClick={() => {}} disabled={!areAllFieldsFilled} />
+        <Button label="Predict Price" onClick={() => { }} disabled={!areAllFieldsFilled} />
 
       </form>
-      {prediction && <p>{prediction}</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      <div className="home-price-container-results">
+        {prediction && (
+          <div className="prediction-container">
+            <b>prediction: </b>
+            <div></div>
+            <p className="prediction-value">$ {prediction}</p>
+          </div>
+        )}
+        {error && <p style={{ color: "red" }}>{error}</p>}
+      </div>
     </div>
   );
 };
