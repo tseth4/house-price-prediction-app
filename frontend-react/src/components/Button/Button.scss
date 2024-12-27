@@ -14,21 +14,19 @@
   cursor: pointer;
   outline: none;
   transition: all 0.3s ease;
-  // DESKTOP
+
   @include bp.respond-to(mobile) {
     width: 75%;
 
   }
 
   &:hover {
-    // background-color: #303f9f;
     box-shadow: 0 0 4px var(--accent-text-color);
 
   }
 
   &:focus {
-    // background-color: #3f51b5;
-    // border-color: #3f51b5;
+
     box-shadow: 0 0 4px var(--accent-text-color);
   }
 

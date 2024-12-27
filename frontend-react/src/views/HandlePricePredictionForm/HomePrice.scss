@@ -3,13 +3,10 @@
 
 
 .home-price-container {
-  // border: 3px solid black;
   background-color: var(--container-color);
   border-radius: 1em;
   width: 90%;
   padding: 1em;
-  // margin: 0 auto;
-  // width: 100%;
   > h1 {
     margin-bottom: 0.35em;
     font-size: 1.25em;
@@ -18,7 +15,6 @@
 
 
   @include bp.respond-to(tablet) {
-    // border: 10px solid pink;
     width: 50%;
   }
 
