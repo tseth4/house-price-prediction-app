@@ -1,6 +1,6 @@
 
 import './App.css'
-import HomePricePredictionForm from './components/HandlePricePredictionForm'
+import HomePricePredictionForm from './components/HandlePricePredictionForm/HandlePricePredictionForm'
 
 function App() {
 

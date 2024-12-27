@@ -1,42 +1,60 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Roboto:wght@300;400;500;700&family=Source+Code+Pro&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Playfair+Display:ital,wght@1,600&family=Roboto:wght@300;400;500;700&family=Source+Code+Pro&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Cutive+Mono&family=Playfair+Display:ital,wght@1,600&family=Roboto:wght@300;400;500;700&family=Source+Code+Pro&display=swap'); */
+
+
+/* background:F0EEEF, border:F7F5F6 */
+/* h1: 232426 */
+/* unentered number: D3D3D4 */
+/* light font: 696B70 */
+/* main font: 333436 */
+/* accent: 019E6F */
+
+html {
+  font-size: 16px;
+}
+
+:root {
+
+  /* --header-font: 'Archivo', sans-serif; */
+  --header-font: 'Roboto', sans-serif;
+  /* --post-paragraph-font-size: 0.9375rem; */
+  --primary-font: 'Roboto', sans-serif;
+  --bg-color: #F0EEEF;
+  --container-color: #FFF;
+  --primary-text-color: #333436;
+  --secondary-text-color: #696B70;
+  --accent-text-color: #019E6F;
+}
+
+* {
+  /* font-family: 'Roboto', sans-serif; */
+  font-family: var(--primary-font);
+  /* font-family: 'Cutive Mono', monospace; */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font-size: 13px; */
+}
+
+
+body {
+  background: var(--bg-color);
+  color: var(--primary-text-color);
+}
+
+.modal--opened {
+  margin: 0;
+  overflow: hidden;
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

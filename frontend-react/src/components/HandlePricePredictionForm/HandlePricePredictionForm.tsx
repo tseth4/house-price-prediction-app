@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import "./HomePrice.scss"
 const HomePricePredictionForm: React.FC = () => {
   const [formData, setFormData] = useState({
     bed: "",
@@ -44,9 +44,9 @@ const HomePricePredictionForm: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="home-price-container">
       <h1>Home Price Prediction</h1>
-      <form onSubmit={handleSubmit}>
+      <form className="home-price-container__form" onSubmit={handleSubmit}>
         <label htmlFor="bed">Number of Bedrooms:</label>
         <input
           type="number"
