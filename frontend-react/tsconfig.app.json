@@ -20,7 +20,16 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    // ...rest of the template
+    "baseUrl": ".",
+    "types": ["node"],
+
+    "paths": {
+      "@/*": ["./src/*", "./dist/*", ""]
+
+    }
   },
+  
   "include": ["src"]
 }

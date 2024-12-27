@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Input from "@/components/InputField/InputField";
+
 import "./HomePrice.scss"
 const HomePricePredictionForm: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -47,7 +49,13 @@ const HomePricePredictionForm: React.FC = () => {
     <div className="home-price-container">
       <h1>Home Price Prediction</h1>
       <form className="home-price-container__form" onSubmit={handleSubmit}>
-        <label htmlFor="bed">Number of Bedrooms:</label>
+        <Input inputType="number" name="bed" label="Bedrooms" value={formData.bed} onChange={handleChange}/>
+        <Input inputType="number" name="bath" label="Bath" value={formData.bath} onChange={handleChange}/>
+        <Input inputType="number" name="acre_lot" label="Acre lot (eg.0.15)" value={formData.acre_lot} onChange={handleChange}/>
+        <Input inputType="number" name="house_size" label="House size (eg. 1500)" value={formData.house_size} onChange={handleChange}/>
+        <Input inputType="text" name="state" label="State (eg. Washington)" value={formData.state} onChange={handleChange}/>
+        <Input inputType="number" name="zip_code" label="Zipcode" value={formData.zip_code} onChange={handleChange}/>
+        {/* <label htmlFor="bed">Number of Bedrooms:</label>
         <input
           type="number"
           id="bed"
@@ -111,7 +119,7 @@ const HomePricePredictionForm: React.FC = () => {
           onChange={handleChange}
           required
           placeholder="e.g., 90210"
-        />
+        /> */}
 
         <button type="submit">Predict Price</button>
       </form>

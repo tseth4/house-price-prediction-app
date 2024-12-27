@@ -1,4 +1,13 @@
 {
+  "compilerOptions": {
+    // ...rest of the template
+    "baseUrl": ".",
+    "types": ["node"],
+
+    "paths": {
+      "@/*": ["./src/*", "./dist/*", ""]    
+    }
+  },
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },
