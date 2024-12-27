@@ -24,20 +24,21 @@
     outline: none;
     appearance: none;
     background-color: #fff;
-    position: relative; // Enable pseudo-elements relative to this
+    position: relative;
+    color: var(--primary-text-color);
+
 
     &:focus {
-      border-color: #3f51b5;
+      border-color: var(--secondary-text-color);
     }
 
-    &:focus ~ .dropdown-label,
-    &.dropdown-filled ~ .dropdown-label {
-      top: -10px; // Moves the label above the dropdown
+    &:focus~.dropdown-label,
+    &.dropdown-filled~.dropdown-label {
+      top: -10px;
       font-size: 12px;
-      color: #3f51b5;
+      color: var(--secondary-text-color);
     }
 
-    // Add a pseudo-element for the border effect
     &::before {
       content: '';
       position: absolute;
@@ -45,15 +46,15 @@
       right: 0;
       top: 0;
       bottom: 0;
-      border: 1px solid transparent; // Initially transparent
+      border: 1px solid transparent;
       border-radius: 4px;
-      z-index: 1; // Stays above the border
+      z-index: 1;
     }
 
-    // Make the border behind the label invisible
+
     &:focus::before,
     &.dropdown-filled::before {
-      border-color: #fff; // Matches the dropdown's background color
+      border-color: #fff;
     }
   }
 }
