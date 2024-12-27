@@ -14,5 +14,6 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src/')
     },
   },
+  base: '/house-price-prediction-app/', // Base path for GitHub Pages
 
 })
