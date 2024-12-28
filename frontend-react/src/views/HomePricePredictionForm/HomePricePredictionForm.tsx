@@ -38,7 +38,7 @@ const HomePricePredictionForm: React.FC = () => {
 
     try {
       console.log("predicting..")
-      const response = await fetch("https://backend-flask-08.eba-6rn7bjqs.us-west-2.elasticbeanstalk.com/predict", {
+      const response = await fetch("https://d3axjaejt6zzts.cloudfront.net/predict", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
