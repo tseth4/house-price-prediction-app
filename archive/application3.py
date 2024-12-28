@@ -1,12 +1,13 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify
 import joblib
 import numpy as np
 import pandas as pd
 from flask_cors import CORS
 
 # Initialize Flask app
-app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
+application = Flask(__name__)
+# CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
+CORS(application, resources={r"/*": {"origins": "https://tseth4.github.io/house-price-prediction-app/"}})
 
 # Load the compressed model and supporting files
 model = joblib.load("model/house_price_model_v2_compressed.pkl")
@@ -14,11 +15,17 @@ scaler = joblib.load("model/scaler.pkl")  # Scaler used during training
 zip_code_avg_price = pd.read_csv("model/zip_code_avg_price.csv", index_col=0).squeeze("columns")  # Load as Series
 le = joblib.load("model/label_encoder.pkl")
 
-@app.route('/')
-def home():
-    return render_template('index.html')
 
-@app.route('/predict', methods=['POST'])
+
+@application.route('/')
+def home():
+    return "Welcome to the Home Page"
+  
+@application.route('/health')
+def health():
+    return "OK", 200
+
+@application.route('/predict', methods=['POST'])
 def predict():
     try:
         # Parse incoming JSON data
@@ -67,4 +74,4 @@ def predict():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    application.run(host='0.0.0.0', port=5000)

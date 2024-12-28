@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Input from "@/components/InputField/InputField";
 import StateDropdown from "../StateDropdown/StateDropdown";
 import Button from "@/components/Button/Button";
@@ -27,9 +27,9 @@ const HomePricePredictionForm: React.FC = () => {
     setFormData((prevData) => ({ ...prevData, state: selectedState }));
   };
 
-  useEffect(() => {
-    console.log("formData: ", formData)
-  }, [formData])
+  // useEffect(() => {
+  //   console.log("formData: ", formData)
+  // }, [formData])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,7 +37,8 @@ const HomePricePredictionForm: React.FC = () => {
     setPrediction(null);
 
     try {
-      const response = await fetch("http://127.0.0.1:5000/predict", {
+      console.log("predicting..")
+      const response = await fetch("https://backend-flask-08.eba-6rn7bjqs.us-west-2.elasticbeanstalk.com/predict", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
