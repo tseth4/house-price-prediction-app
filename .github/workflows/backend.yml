@@ -1,0 +1,40 @@
+name: Deploy Backend
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          cd backend-flask
+          pip install -r requirements.txt
+      - name: Zip application
+        run: |
+          cd backend-flask
+          zip -r ../backend-flask-deployment.zip . -x "*.git*" "__pycache__/*" "*.DS_Store" "dependencies/*"
+          cd dependencies
+          zip -r ../../backend-flask-deployment.zip . -x "*.git*" "__pycache__/*" "*.DS_Store"
+
+      - name: Deploy to Elastic Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v22
+        with:
+          access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: ${{ secrets.AWS_REGION }}
+          application_name: "<Your-Elastic-Beanstalk-Application-Name>"
+          environment_name: ${{ secrets.EB_ENVIRONMENT_NAME }}
+          version_label: ${{ github.run_id }}
+          deployment_package: "backend-flask-deployment.zip"
