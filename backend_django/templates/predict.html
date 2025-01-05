@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Price Prediction</title>
+</head>
+<body>
+    <h1>Home Price Prediction</h1>
+    <form method="POST" action="/predict/">
+        {% csrf_token %}
+        <label for="sqft">Square Footage:</label>
+        <input type="number" id="sqft" name="sqft" required>
+        <button type="submit">Predict</button>
+    </form>
+</body>
+</html>
