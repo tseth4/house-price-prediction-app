@@ -29,6 +29,9 @@ jobs:
           npm run build
 
       - name: Deploy to Github Pages
-        run: npx gh-pages -d dist --repo https://x-access-token:${{ secrets.GH_PAGES_TOKEN }}@github.com/tseth4/house-price-prediction-app.git
+      
+        run: |
+          cd frontend-react
+          npx gh-pages -d dist --repo https://x-access-token:${{ secrets.GH_PAGES_TOKEN }}@github.com/tseth4/house-price-prediction-app.git
 
 
