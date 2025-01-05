@@ -34,7 +34,7 @@ jobs:
           access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           region: ${{ secrets.AWS_REGION }}
-          application_name: "<Your-Elastic-Beanstalk-Application-Name>"
+          application_name: "backend-flask"
           environment_name: ${{ secrets.EB_ENVIRONMENT_NAME }}
           version_label: ${{ github.run_id }}
           deployment_package: "backend-flask-deployment.zip"
