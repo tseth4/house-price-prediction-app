@@ -25,8 +25,6 @@ jobs:
         run: |
           cd backend-flask
           zip -r ../backend-flask-deployment.zip . -x "*.git*" "__pycache__/*" "*.DS_Store" "dependencies/*"
-          cd dependencies
-          zip -r ../../backend-flask-deployment.zip . -x "*.git*" "__pycache__/*" "*.DS_Store"
 
       - name: Deploy to Elastic Beanstalk
         uses: einaregilsson/beanstalk-deploy@v22
