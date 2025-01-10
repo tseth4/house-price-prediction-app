@@ -60,7 +60,7 @@ const HomePricePredictionForm: React.FC = () => {
 
   return (
     <div className="home-price-container">
-      <h1>Home Price Prediction</h1>
+      <h1>Home Price Prediction - PS: Service is currently unavailable.</h1>
       <form className="home-price-container__form" onSubmit={handleSubmit}>
         <Input inputType="number" name="bed" label="Bedrooms" value={formData.bed} onChange={handleChange} />
         <Input inputType="number" name="bath" label="Bath" value={formData.bath} onChange={handleChange} />
